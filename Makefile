@@ -1,31 +1,26 @@
-NAME = so_long
-
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# Makefile de so_long
 
 NAME = so_long
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-# Dossiers
+# Répertoires
+FT_PRINTF_DIR = ./libft/ft_printffinal
+GNL_DIR = ./libft/gnl2
 LIBFT_DIR = ./libft
+LIBFT_INCLUDES = $(LIBFT_DIR)/libftincludes
 MLX_DIR = ./minilibx
-SRC_DIR = ./src
 
-# Fichiers sources
-SRC = $(SRC_DIR)/main.c $(SRC_DIR)/game_loop.c $(SRC_DIR)/map_parser.c \
-      $(SRC_DIR)/player_controls.c $(SRC_DIR)/render.c
-
+# Sources
+SRC = main.c
 OBJ = $(SRC:.c=.o)
 
-# Fichiers de librairie
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 
-# Flags pour lier MLX, X11, OpenGL, AppKit
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
-INCLUDES = -I$(LIBFT_DIR) -I$(MLX_DIR) -I/opt/X11/include
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+INCLUDES = -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(LIBFT_INCLUDES) -I$(MLX_DIR)
 
 all: $(NAME)
 
@@ -38,7 +33,7 @@ $(LIBFT):
 $(MLX):
 	@$(MAKE) -C $(MLX_DIR)
 
-.c.o:
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 clean:
