@@ -3,6 +3,8 @@
 
 #define TILE_SIZE 64
 
+#include <fcntl.h>
+
 typedef struct s_position
 {
     int x;
@@ -18,5 +20,7 @@ typedef struct s_map
     int exit_count;      // Nombre de sorties (E)
     int collectible_count; // Nombre de collectables (C)
 } t_map;
+
+int read_map(const char *filename, t_map *map);
 
 #endif

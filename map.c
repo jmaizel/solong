@@ -82,6 +82,8 @@ int read_map(const char *filename, t_map *map)
     if (!read_lines(fd, map))
     {
         close(fd);
+        if (map->map)
+            free_map(map->map);
         return (0);
     }
 
