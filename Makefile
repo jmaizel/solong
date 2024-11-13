@@ -6,26 +6,32 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 # Répertoires
-FT_PRINTF_DIR = ./libft/ft_printffinal
-GNL_DIR = ./libft/gnl2
 LIBFT_DIR = ./libft
-LIBFT_INCLUDES = $(LIBFT_DIR)/libftincludes
+LIBFT_INCLUDES = $(LIBFT_DIR)/includes
 MLX_DIR = ./minilibx
+SRC_DIR = ./srcs
 
 # Sources
-SRC = main.c
+SRC_FILES = draw_map.c \
+            map.c \
+            parsing.c \
+            player.c \
+            utils.c
+
+SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:.c=.o)
+OBJ += main.o  # Ajouter main.o si main.c est dans le répertoire racine
 
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-INCLUDES = -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(LIBFT_INCLUDES) -I$(MLX_DIR)
+INCLUDES = -I$(LIBFT_INCLUDES) -I$(MLX_DIR) -I$(SRC_DIR) -I.
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -33,8 +39,11 @@ $(LIBFT):
 $(MLX):
 	@$(MAKE) -C $(MLX_DIR)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+main.o: main.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
