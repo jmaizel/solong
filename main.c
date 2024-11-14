@@ -15,10 +15,8 @@ int load_textures(t_game *game)
     game->floor_texture = mlx_xpm_file_to_image(game->mlx, "textures/sol.xpm", &width, &height);
     game->player_texture = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm", &width, &height);
     game->collectible_texture = mlx_xpm_file_to_image(game->mlx, "textures/collectible.xpm", &width, &height);
-    game->exit_texture = mlx_xpm_file_to_image(game->mlx, "textures/buisson.xpm", &width, &height);
-    game->orc_texture = mlx_xpm_file_to_image(game->mlx, "textures/orc.xpm", &width, &height);
-    game->skeleton_texture = mlx_xpm_file_to_image(game->mlx, "textures/squelette.xpm", &width, &height);
-
+    game->exit_texture = mlx_xpm_file_to_image(game->mlx, "textures/portail.xpm", &width, &height);
+    game->orc_texture = mlx_xpm_file_to_image(game->mlx, "textures/buisson.xpm", &width, &height);
     if (!game->wall_texture || !game->floor_texture || !game->player_texture ||
         !game->collectible_texture || !game->exit_texture)
         return (0);
@@ -75,35 +73,16 @@ int main(void)
     char    *map_filename = "textures/mapN1.ber";
 
     ft_memset(&game, 0, sizeof(t_game));
-
-    // Initialisation du générateur de nombres aléatoires
-    srand(time(NULL));
-
-    // Lecture et validation de la carte
     if (!check_all(&game, map_filename))
-    {
-        free_map(game.map.map);
-        return 1;
-    }
+        return (free_map(game.map.map), 1);
     game.mlx = mlx_init();
     if (!game.mlx)
-    {
-        free_map(game.map.map);
-        return 1;
-    }
-
+        return (free_map(game.map.map), 1);
     if (!load_textures(&game))
-    {
-        free_map(game.map.map);
-        return 1;
-    }
+        return (free_map(game.map.map), 1);
     game.win = mlx_new_window(game.mlx, game.map.width * TILE_SIZE, game.map.height * TILE_SIZE, "so_long");
     if (!game.win)
-    {
-        destroy_textures(&game);
-        free_map(game.map.map);
-        return 1;
-    }
+        return (destroy_textures(&game), free_map(game.map.map), 1);
     find_player_position(&game);
     draw_map(&game);
     mlx_key_hook(game.win, handle_keypress, &game);

@@ -6,7 +6,7 @@
 /*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:53 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/13 21:33:24 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/14 13:57:04 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char **append_line_to_map(char **map, int line_count, char *line)
 
     new_map = (char **)malloc(sizeof(char *) * (line_count + 2));
     if (!new_map)
-    {
-        ft_printf("Error\n Memory allocation problem\n");
         return NULL;
-    }
     i = 0;
     while (i < line_count)
     {
@@ -52,12 +49,13 @@ int read_lines(int fd, t_map *map)
 {
     char *line;
     int line_count;
+    size_t len;
 
     line_count = 0;
     map->map = NULL;
     while ((line = get_next_line(fd)) != NULL)
     {
-        size_t len = ft_strlen(line);
+        len = ft_strlen(line);
         if (len > 0 && line[len - 1] == '\n')
             line[len - 1] = '\0';
         map->map = append_line_to_map(map->map, line_count, line);
@@ -83,7 +81,6 @@ int read_map(const char *filename, t_map *map)
     fd = open_map_file(filename);
     if (fd < 0)
         return (0);
-
     if (!read_lines(fd, map))
     {
         close(fd);
@@ -93,6 +90,6 @@ int read_map(const char *filename, t_map *map)
     }
 
     close(fd);
-    return 1;
+    return (1);
 }
 

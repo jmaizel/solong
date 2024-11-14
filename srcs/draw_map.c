@@ -6,7 +6,7 @@
 /*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:20:52 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/13 22:00:35 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/14 13:55:26 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ static void *get_texture_for_tile(t_game *game, char tile, int x, int y)
         if (x == 0 || x == game->map.width - 1 || y == 0 || y == game->map.height - 1)
             return game->wall_texture;
         else
-        {
-            if (rand() % 2)
                 return game->orc_texture;
-            else
-                return game->skeleton_texture;
-        }
     }
     else if (tile == '0')
         return game->floor_texture;
@@ -41,7 +36,6 @@ static void *get_texture_for_tile(t_game *game, char tile, int x, int y)
     ft_printf("Erreur : Caractère de tuile inconnu '%c'\n", tile);
     return NULL;
 }
-
 
 void draw_map(t_game *game)
 {

@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#define TILE_SIZE 64
+#define TILE_SIZE 32
 
 #include <fcntl.h> 
 #include <mlx.h> 
@@ -33,7 +33,6 @@ typedef struct s_game
     void        *collectible_texture;
     void        *exit_texture;
     void        *orc_texture;
-    void        *skeleton_texture;
     t_position  player_pos;
 } t_game;
 
