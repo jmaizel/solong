@@ -6,7 +6,7 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:04:42 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 13:00:22 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:49:58 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_map_rectangular(char **map)
 
 	if (!map || !map[0])
 	{
-		ft_printf("Error\n Empty or uninitialized map\n");
+		ft_printf("Error\nEmpty or uninitialized map\n");
 		return (0);
 	}
 	line_length = ft_strlen(map[0]);
@@ -31,7 +31,7 @@ int	is_map_rectangular(char **map)
 	{
 		if (ft_strlen(map[i]) != line_length)
 		{
-			ft_printf("Error\n The map is not rectangular\n");
+			ft_printf("Error\nThe map is not rectangular\n");
 			return (0);
 		}
 		i++;
@@ -46,7 +46,7 @@ int	are_map_borders_valid(char **map)
 	int	height;
 
 	if (!map || !map[0])
-		return (ft_printf("Error\n Empty or uninitialized map\n"), 0);
+		return (ft_printf("Error\nEmpty or uninitialized map\n"), 0);
 	height = 0;
 	while (map[height])
 		height++;
@@ -55,21 +55,21 @@ int	are_map_borders_valid(char **map)
 	while (i < width)
 	{
 		if (map[0][i] != '1')
-			return (ft_printf("Error\n The top border is not a wall\n"), 0);
+			return (ft_printf("Error\nThe top border is not a wall\n"), 0);
 		i++;
 	}
 	i = 0;
 	while (i < width)
 	{
 		if (map[height - 1][i] != '1')
-			return (ft_printf("Error\n The bottom border is not a wall\n"), 0);
+			return (ft_printf("Error\nThe bottom border is not a wall\n"), 0);
 		i++;
 	}
 	i = 0;
 	while (i < height)
 	{
 		if (map[i][0] != '1' || map[i][width - 1] != '1')
-			return (ft_printf("Error\n The side borders are not walls\n"), 0);
+			return (ft_printf("Error\nThe side borders are not walls\n"), 0);
 		i++;
 	}
 	return (1);
@@ -95,9 +95,9 @@ int	map_contains_only_one_player(char **map)
 		y++;
 	}
 	if (player_count < 1)
-		return (ft_printf("Error\n No player on the map\n"), 0);
+		return (ft_printf("Error\nNo player on the map\n"), 0);
 	else if (player_count > 1)
-		return (ft_printf("Error\n Too many player positions on the map\n"), 0);
+		return (ft_printf("Error\nToo many player positions on the map\n"), 0);
 	return (1);
 }
 
@@ -143,7 +143,7 @@ int	all_characters_are_valid(char **map)
 			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'P'
 				&& map[y][x] != 'C' && map[y][x] != 'E')
 			{
-				ft_printf("Error\n Invalid character '%c' on the map\n",
+				ft_printf("Error\nInvalid character '%c' on the map\n",
 					map[y][x]);
 				return (0);
 			}

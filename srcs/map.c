@@ -6,7 +6,7 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:53 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 13:00:20 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:49:34 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	open_map_file(const char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		ft_printf("Error\n Unable to open file %s\n", filename);
+		ft_printf("Error\nUnable to open file %s\n", filename);
 	return (fd);
 }
 
@@ -65,7 +65,7 @@ int	read_lines(int fd, t_map *map)
 	}
 	if (line_count == 0)
 	{
-		ft_printf("Error\n The map is empty\n");
+		ft_printf("Error\nThe map is empty\n");
 		return (0);
 	}
 	map->height = line_count;

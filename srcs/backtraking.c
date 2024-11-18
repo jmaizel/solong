@@ -6,7 +6,7 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:53:50 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 17:40:27 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:50:31 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,10 @@ int	check_valid_path(t_map *map_struct)
 		i++;
 	}
 	free(map_copy);
+	if (map_struct->collectables_count != 0 || !map_struct->exit_found)
+	{
+		ft_printf("Error\nMap is invalid.");
+		return (0);
+	}
 	return (map_struct->collectables_count == 0 && map_struct->exit_found);
 }

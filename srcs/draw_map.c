@@ -6,7 +6,7 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:20:52 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 13:00:18 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:49:17 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	*get_texture_for_tile(t_game *game, char tile, int x, int y)
 		return (game->collectible_texture);
 	else if (tile == 'E')
 		return (game->exit_texture);
-	ft_printf("Erreur : Caractère de tuile inconnu '%c'\n", tile);
+	ft_printf("Error\nInvalid character '%c'\n", tile);
 	return (NULL);
 }
 
