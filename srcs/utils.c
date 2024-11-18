@@ -6,7 +6,7 @@
 /*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:30:27 by jacobmaizel       #+#    #+#             */
-/*   Updated: 2024/11/18 21:12:16 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/18 22:04:14 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,19 @@ int	check_all(t_game *game, char *map_filename)
 		|| !check_valid_path(&game->map))
 		return (0);
 	return (1);
+}
+
+void	close_game(t_game *game)
+{
+	destroy_textures(game);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	free_map(game->map.map);
+	exit(0);
+}
+
+int	close_window(t_game *game)
+{
+	close_game(game);
+	return (0);
 }

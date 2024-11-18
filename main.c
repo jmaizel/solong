@@ -6,7 +6,7 @@
 /*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:54:08 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 21:55:37 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/18 22:05:36 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,6 @@
 #include "get_next_line.h"
 #include "libft.h"
 #include <mlx.h>
-
-int	load_textures(t_game *game)
-{
-	int	width;
-	int	height;
-
-	game->wall_texture = mlx_xpm_file_to_image(game->mlx,
-			"textures/gros-arbre-jaune.xpm", &width, &height);
-	game->floor_texture = mlx_xpm_file_to_image(game->mlx, "textures/sol.xpm",
-			&width, &height);
-	game->player_texture = mlx_xpm_file_to_image(game->mlx,
-			"textures/player.xpm", &width, &height);
-	game->collectible_texture = mlx_xpm_file_to_image(game->mlx,
-			"textures/collectible.xpm", &width, &height);
-	game->exit_texture = mlx_xpm_file_to_image(game->mlx,
-			"textures/portail.xpm", &width, &height);
-	game->orc_texture = mlx_xpm_file_to_image(game->mlx, "textures/buisson.xpm",
-			&width, &height);
-	if (!game->wall_texture || !game->floor_texture || !game->player_texture
-		|| !game->collectible_texture || !game->exit_texture)
-		return (0);
-	return (1);
-}
-
-void	destroy_textures(t_game *game)
-{
-	if (game->wall_texture)
-		mlx_destroy_image(game->mlx, game->wall_texture);
-	if (game->floor_texture)
-		mlx_destroy_image(game->mlx, game->floor_texture);
-	if (game->player_texture)
-		mlx_destroy_image(game->mlx, game->player_texture);
-	if (game->collectible_texture)
-		mlx_destroy_image(game->mlx, game->collectible_texture);
-	if (game->exit_texture)
-		mlx_destroy_image(game->mlx, game->exit_texture);
-}
-
-void	close_game(t_game *game)
-{
-	destroy_textures(game);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	free_map(game->map.map);
-	exit(0);
-}
 
 int	handle_keypress(int keycode, t_game *game)
 {
@@ -77,14 +31,8 @@ int	handle_keypress(int keycode, t_game *game)
 	return (0);
 }
 
-int	close_window(t_game *game)
-{
-	close_game(game);
-	return (0);
-}
-
 int main(void)
-{
+{ 
     t_game game;
     char *map_filename;
 
