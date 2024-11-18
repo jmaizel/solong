@@ -1,11 +1,8 @@
-# Makefile de so_long
-
 NAME = so_long
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-# Répertoires
 LIBFT_DIR = ./libft
 LIBFT_INCLUDES = $(LIBFT_DIR)/includes
 MLX_DIR = ./minilibx
@@ -16,11 +13,12 @@ SRC_FILES = draw_map.c \
             map.c \
             parsing.c \
             player.c \
-            utils.c
+            utils.c \
+			backtraking.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:.c=.o)
-OBJ += main.o  # Ajouter main.o si main.c est dans le répertoire racine
+OBJ += main.o 
 
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a

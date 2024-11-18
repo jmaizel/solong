@@ -20,6 +20,8 @@ typedef struct s_map
     char **map;
     int width;
     int height;
+	int collectables_count;
+    int exit_found;
 } t_map;
 
 typedef struct s_game
@@ -47,6 +49,7 @@ int check_all(t_game *game,char *map_filename);
 void draw_map(t_game *game);
 void move_player(t_game *game, int dx, int dy);
 void find_player_position(t_game *game);
+int	check_valid_path(t_map *map_struct);
 
 #endif
 

@@ -3,155 +3,153 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:04:42 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/13 21:22:13 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/18 13:00:22 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
-#include "libft.h"
 #include "ft_printf.h"
-#include "get_next_line.h"
 #include "game.h"
+#include "get_next_line.h"
+#include "libft.h"
 
-int is_map_rectangular(char **map)
+int	is_map_rectangular(char **map)
 {
-    size_t i;
-    size_t line_length;
+	size_t	i;
+	size_t	line_length;
 
-    if (!map || !map[0])
-    {
-        ft_printf("Error\n Empty or uninitialized map\n");
-        return 0;
-    }
-    line_length = ft_strlen(map[0]);
-    i = 0;
-    while (map[i])
-    {
-        if (ft_strlen(map[i]) != line_length)
-        {
-            ft_printf("Error\n The map is not rectangular\n");
-            return 0;
-        }
-        i++;
-    }
-    return 1;
+	if (!map || !map[0])
+	{
+		ft_printf("Error\n Empty or uninitialized map\n");
+		return (0);
+	}
+	line_length = ft_strlen(map[0]);
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) != line_length)
+		{
+			ft_printf("Error\n The map is not rectangular\n");
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
-int are_map_borders_valid(char **map)
+int	are_map_borders_valid(char **map)
 {
-    int i;
-    int width;
-    int height;
+	int	i;
+	int	width;
+	int	height;
 
-    if (!map || !map[0])
-        return (ft_printf("Error\n Empty or uninitialized map\n"), 0);
-    height = 0;
-    while (map[height])
-        height++;
-    width = ft_strlen(map[0]);
-    i = 0;
-    while (i < width)
-    {
-        if (map[0][i] != '1')
-            return (ft_printf("Error\n The top border is not a wall\n"), 0);
-        i++;
-    }
-    i = 0;
-    while (i < width)
-    {
-        if (map[height - 1][i] != '1')
-            return (ft_printf("Error\n The bottom border is not a wall\n"), 0);
-        i++;
-    }
-    i = 0;
-    while (i < height)
-    {
-        if (map[i][0] != '1' || map[i][width - 1] != '1')
-            return (ft_printf("Error\n The side borders are not walls\n"), 0);
-        i++;
-    }
-    return 1;
+	if (!map || !map[0])
+		return (ft_printf("Error\n Empty or uninitialized map\n"), 0);
+	height = 0;
+	while (map[height])
+		height++;
+	width = ft_strlen(map[0]);
+	i = 0;
+	while (i < width)
+	{
+		if (map[0][i] != '1')
+			return (ft_printf("Error\n The top border is not a wall\n"), 0);
+		i++;
+	}
+	i = 0;
+	while (i < width)
+	{
+		if (map[height - 1][i] != '1')
+			return (ft_printf("Error\n The bottom border is not a wall\n"), 0);
+		i++;
+	}
+	i = 0;
+	while (i < height)
+	{
+		if (map[i][0] != '1' || map[i][width - 1] != '1')
+			return (ft_printf("Error\n The side borders are not walls\n"), 0);
+		i++;
+	}
+	return (1);
 }
 
-int map_contains_only_one_player(char **map)
+int	map_contains_only_one_player(char **map)
 {
-    int y;
-    int x;
-    int player_count;
+	int	y;
+	int	x;
+	int	player_count;
 
-    y = 0;
-    player_count = 0;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            if (map[y][x] == 'P')
-                player_count++;
-            x++;
-        }
-        y++;
-    }
-    if (player_count < 1)
-        return (ft_printf("Error\n No player on the map\n"), 0);
-    else if (player_count > 1)
-        return (ft_printf("Error\n Too many player positions on the map\n"), 0);
-    return 1;
+	y = 0;
+	player_count = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'P')
+				player_count++;
+			x++;
+		}
+		y++;
+	}
+	if (player_count < 1)
+		return (ft_printf("Error\n No player on the map\n"), 0);
+	else if (player_count > 1)
+		return (ft_printf("Error\n Too many player positions on the map\n"), 0);
+	return (1);
 }
 
-int map_contains_exit_and_collectible(char **map)
+int	map_contains_exit_and_collectible(char **map)
 {
-    int y;
-    int x;
-    int exit_count;
-    int collectible_count;
+	int	y;
+	int	x;
+	int	exit_count;
+	int	collectible_count;
 
-    y = 0;
-    exit_count = 0;
-    collectible_count = 0;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            if (map[y][x] == 'E')
-                exit_count++;
-            else if (map[y][x] == 'C')
-                collectible_count++;
-            x++;
-        }
-        y++;
-    }
-    if (exit_count < 1 || collectible_count < 1)
-        return (ft_printf("Error\n"), 0);
-    return 1;
+	y = 0;
+	exit_count = 0;
+	collectible_count = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'E')
+				exit_count++;
+			else if (map[y][x] == 'C')
+				collectible_count++;
+			x++;
+		}
+		y++;
+	}
+	if (exit_count < 1 || collectible_count < 1)
+		return (ft_printf("Error\n"), 0);
+	return (1);
 }
 
-int all_characters_are_valid(char **map)
+int	all_characters_are_valid(char **map)
 {
-    int y;
-    int x;
+	int	y;
+	int	x;
 
-    y = 0;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            if (map[y][x] != '1' && map[y][x] != '0' &&
-                map[y][x] != 'P' && map[y][x] != 'C' &&
-                map[y][x] != 'E')
-            {
-                ft_printf("Error\n Invalid character '%c' on the map\n", map[y][x]);
-                return 0;
-            }
-            x++;
-        }
-        y++;
-    }
-    return 1;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'P'
+				&& map[y][x] != 'C' && map[y][x] != 'E')
+			{
+				ft_printf("Error\n Invalid character '%c' on the map\n",
+					map[y][x]);
+				return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }
-
