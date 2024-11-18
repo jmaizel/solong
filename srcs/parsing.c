@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
+/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:04:42 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 17:49:58 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:12:43 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "game.h"
 #include "get_next_line.h"
 #include "libft.h"
+#include <mlx.h>
 
 int	is_map_rectangular(char **map)
 {

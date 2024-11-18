@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
+/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:20:52 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 17:49:17 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:58:30 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "game.h"
 #include "get_next_line.h"
 #include "libft.h"
+#include <mlx.h>
 
 static void	*get_texture_for_tile(t_game *game, char tile, int x, int y)
 {
@@ -37,24 +38,35 @@ static void	*get_texture_for_tile(t_game *game, char tile, int x, int y)
 	return (NULL);
 }
 
-void	draw_map(t_game *game)
+void draw_map(t_game *game)
 {
-	int		x;
-	int		y;
-	void	*texture;
+    int x;
+    int y;
+    void *texture;
 
-	y = 0;
-	while (y < game->map.height)
-	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			texture = get_texture_for_tile(game, game->map.map[y][x], x, y);
-			if (texture)
-				mlx_put_image_to_window(game->mlx, game->win, texture, x
-					* TILE_SIZE, y * TILE_SIZE);
-			x++;
-		}
-		y++;
-	}
+    y = 0;
+    while (y < game->map.height)
+    {
+        x = 0;
+        while (x < game->map.width)
+        {
+            char tile = game->map.map[y][x];
+
+            if (tile == 'E')
+            {
+                if (game->map.collectables_count > 0)
+                    texture = game->orc_texture;
+                else
+                    texture = game->exit_texture;
+            }
+            else
+            {
+                texture = get_texture_for_tile(game, tile, x, y);
+            }
+            if (texture)
+                mlx_put_image_to_window(game->mlx, game->win, texture, x * TILE_SIZE, y * TILE_SIZE);
+            x++;
+        }
+        y++;
+    }
 }

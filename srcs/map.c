@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
+/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:53 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 17:49:34 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:12:38 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "game.h"
 #include "get_next_line.h"
 #include "libft.h"
+#include <mlx.h>
 
 char	**append_line_to_map(char **map, int line_count, char *line)
 {

@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
+/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:30:27 by jacobmaizel       #+#    #+#             */
-/*   Updated: 2024/11/18 17:42:27 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:12:16 by jacobmaizel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "game.h"
-#include <stdlib.h>
+#include "get_next_line.h"
+#include "libft.h"
+#include <mlx.h>
 
 void	free_map(char **map)
 {
