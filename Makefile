@@ -14,7 +14,9 @@ SRC_FILES = draw_map.c \
             parsing.c \
             player.c \
             utils.c \
-			backtraking.c
+			backtraking.c \
+			map_borders.c
+			
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(SRC:.c=.o)

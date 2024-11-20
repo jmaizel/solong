@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:04:42 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 21:12:43 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/19 11:32:11 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,6 @@ int	is_map_rectangular(char **map)
 			ft_printf("Error\nThe map is not rectangular\n");
 			return (0);
 		}
-		i++;
-	}
-	return (1);
-}
-
-int	are_map_borders_valid(char **map)
-{
-	int	i;
-	int	width;
-	int	height;
-
-	if (!map || !map[0])
-		return (ft_printf("Error\nEmpty or uninitialized map\n"), 0);
-	height = 0;
-	while (map[height])
-		height++;
-	width = ft_strlen(map[0]);
-	i = 0;
-	while (i < width)
-	{
-		if (map[0][i] != '1')
-			return (ft_printf("Error\nThe top border is not a wall\n"), 0);
-		i++;
-	}
-	i = 0;
-	while (i < width)
-	{
-		if (map[height - 1][i] != '1')
-			return (ft_printf("Error\nThe bottom border is not a wall\n"), 0);
-		i++;
-	}
-	i = 0;
-	while (i < height)
-	{
-		if (map[i][0] != '1' || map[i][width - 1] != '1')
-			return (ft_printf("Error\nThe side borders are not walls\n"), 0);
 		i++;
 	}
 	return (1);

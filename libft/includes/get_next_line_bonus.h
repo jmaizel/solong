@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdedessu <cdedessu@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:16:56 by cdedessu          #+#    #+#             */
-/*   Updated: 2024/10/31 09:43:48 by cdedessu         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:54:10 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
-# include <unistd.h> 
-# include <stdlib.h>
 # include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 19

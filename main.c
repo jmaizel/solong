@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jacobmaizel <jacobmaizel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:54:08 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/18 22:05:36 by jacobmaizel      ###   ########.fr       */
+/*   Updated: 2024/11/20 11:17:06 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 int	handle_keypress(int keycode, t_game *game)
 {
+	char	*move_count;
+
 	if (keycode == 53)
 		close_game(game);
 	else if (keycode == 0)
@@ -28,35 +30,42 @@ int	handle_keypress(int keycode, t_game *game)
 		move_player(game, 1, 0);
 	else if (keycode == 13)
 		move_player(game, 0, -1);
+	else
+		return (0);
+	game->count_move++;
+	draw_map(game);
+	move_count = ft_itoa(game->count_move);
+	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, "Moves: ");
+	mlx_string_put(game->mlx, game->win, 80, 10, 0xFFFFFF, move_count);
+	free(move_count);
 	return (0);
 }
 
-int main(void)
-{ 
-    t_game game;
-    char *map_filename;
 
-    map_filename = "textures/mapN1.ber";
-    ft_memset(&game, 0, sizeof(t_game));
-    if (!check_all(&game, map_filename))
-        return (free_map(game.map.map), 1);
-    initialize_collectables_count(&game);
-    game.mlx = mlx_init();
-    if (!game.mlx)
-        return (free_map(game.map.map), 1);
+int	main(void)
+{
+	t_game	game;
+	char	*map_filename;
 
-    if (!load_textures(&game))
-        return (free_map(game.map.map), 1);
-    game.win = mlx_new_window(game.mlx, game.map.width * TILE_SIZE,
-            game.map.height * TILE_SIZE, "so_long");
-    if (!game.win)
-        return (destroy_textures(&game), free_map(game.map.map), 1);
-    find_player_position(&game);
-    draw_map(&game);
-    mlx_key_hook(game.win, handle_keypress, &game);
-    mlx_hook(game.win, 17, 0, close_window, &game);
-    mlx_loop(game.mlx);
-    close_game(&game);
-    return (0);
+	map_filename = "textures/mapN1.ber";
+	ft_memset(&game, 0, sizeof(t_game));
+	if (!check_all(&game, map_filename))
+		return (free_map(game.map.map), 1);
+	initialize_collectables_count(&game);
+	game.mlx = mlx_init();
+	if (!game.mlx)
+		return (free_map(game.map.map), 1);
+	if (!load_textures(&game))
+		return (free_map(game.map.map), 1);
+	game.win = mlx_new_window(game.mlx, game.map.width * TILE_SIZE,
+			game.map.height * TILE_SIZE, "so_long");
+	if (!game.win)
+		return (destroy_textures(&game), free_map(game.map.map), 1);
+	find_player_position(&game);
+	draw_map(&game);
+	mlx_key_hook(game.win, handle_keypress, &game);
+	mlx_hook(game.win, 17, 0, close_window, &game);
+	mlx_loop(game.mlx);
+	close_game(&game);
+	return (0);
 }
-
