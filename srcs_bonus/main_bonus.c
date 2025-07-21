@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:54:08 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/20 11:17:06 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:27:09 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "game.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include <mlx.h>
+#include "game_bonus.h"
 
 int	handle_keypress(int keycode, t_game *game)
 {
-	char	*move_count;
-
 	if (keycode == 53)
 		close_game(game);
 	else if (keycode == 0)
@@ -30,9 +24,19 @@ int	handle_keypress(int keycode, t_game *game)
 		move_player(game, 1, 0);
 	else if (keycode == 13)
 		move_player(game, 0, -1);
-	else
-		return (0);
-	game->count_move++;
+	return (0);
+}
+
+int	animate_player(t_game *game)
+{
+	char	*move_count;
+
+	game->animation_counter++;
+	if (game->animation_counter >= 25)
+	{
+		game->current_frame = (game->current_frame + 1) % 3;
+		game->animation_counter = 0;
+	}
 	draw_map(game);
 	move_count = ft_itoa(game->count_move);
 	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, "Moves: ");
@@ -40,7 +44,6 @@ int	handle_keypress(int keycode, t_game *game)
 	free(move_count);
 	return (0);
 }
-
 
 int	main(void)
 {
@@ -65,6 +68,7 @@ int	main(void)
 	draw_map(&game);
 	mlx_key_hook(game.win, handle_keypress, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
+	mlx_loop_hook(game.mlx, animate_player, &game);
 	mlx_loop(game.mlx);
 	close_game(&game);
 	return (0);

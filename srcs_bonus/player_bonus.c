@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:30:52 by jacobmaizel       #+#    #+#             */
-/*   Updated: 2024/11/27 11:31:50 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:31:55 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 void	initialize_collectables_count(t_game *game)
 {
@@ -63,7 +63,16 @@ int	is_move_valid(t_game *game, int x, int y)
 		return (0);
 	tile = game->map.map[y][x];
 	if (tile == '1')
-		return (0);
+	{
+		if (x == 0 || y == 0 || x == game->map.width - 1
+			|| y == game->map.height - 1)
+			return (0);
+		else
+		{
+			ft_printf("Game Over, burned by flames!\n");
+			close_game(game);
+		}
+	}
 	if (tile == 'E' && game->map.collectables_count > 0)
 		return (0);
 	return (1);
@@ -80,7 +89,7 @@ void	process_target_tile(t_game *game, char tile, int x, int y)
 	}
 	else if (tile == 'E' && game->map.collectables_count == 0)
 	{
-		ft_printf("GG you just finished the game in %i moves!\n",
+		ft_printf("GG you just finished the game in %i moves !\n",
 			game->count_move + 1);
 		close_game(game);
 	}
@@ -88,6 +97,7 @@ void	process_target_tile(t_game *game, char tile, int x, int y)
 
 void	move_player(t_game *game, int dx, int dy)
 {
+	char	*move_count;
 	int		new_x;
 	int		new_y;
 	char	target_tile;
@@ -104,7 +114,10 @@ void	move_player(t_game *game, int dx, int dy)
 	game->player_pos.x = new_x;
 	game->player_pos.y = new_y;
 	game->map.map[new_y][new_x] = 'P';
-	draw_map(game);
 	game->count_move++;
-	ft_printf("moves : %i\n", game->count_move);
+	draw_map(game);
+	move_count = ft_itoa(game->count_move);
+	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, "Moves: ");
+	mlx_string_put(game->mlx, game->win, 80, 10, 0xFFFFFF, move_count);
+	free(move_count);
 }

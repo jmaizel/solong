@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:20:52 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/26 20:26:55 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:15:50 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 void	*get_texture_for_tile(t_game *game, char tile, int x, int y)
 {
@@ -18,7 +18,7 @@ void	*get_texture_for_tile(t_game *game, char tile, int x, int y)
 	{
 		if (x == 0 || y == 0 || x == game->map.width - 1
 			|| y == game->map.height - 1)
-			return (game->wall);
+			return (game->wall[game->current_frame]);
 		else
 			return (game->barriere_texture);
 	}
@@ -83,7 +83,11 @@ int	load_textures(t_game *game)
 	int	width;
 	int	height;
 
-	game->wall = mlx_xpm_file_to_image(game->mlx, "f1.xpm", &width, &height);
+	game->wall[0] = mlx_xpm_file_to_image(game->mlx, "f1.xpm", &width, &height);
+	game->wall[1] = mlx_xpm_file_to_image(game->mlx, "f2.xpm", &width, &height);
+	game->wall[2] = mlx_xpm_file_to_image(game->mlx, "f3.xpm", &width, &height);
+	game->wall[3] = mlx_xpm_file_to_image(game->mlx, "f4.xpm", &width, &height);
+	game->wall[4] = mlx_xpm_file_to_image(game->mlx, "f5.xpm", &width, &height);
 	game->floor = mlx_xpm_file_to_image(game->mlx, "sol.xpm", &width, &height);
 	game->player_texture = mlx_xpm_file_to_image(game->mlx,
 			"textures/player-droite.xpm", &width, &height);
@@ -95,7 +99,8 @@ int	load_textures(t_game *game)
 			"textures/barriere.xpm", &width, &height);
 	game->exit_ferme_texture = mlx_xpm_file_to_image(game->mlx,
 			"textures/portail-ferme.xpm", &width, &height);
-	if (!game->wall || !game->floor || !game->player_texture
+	if (!game->wall[0] || !game->wall[1] || !game->wall[2] || !game->wall[3]
+		|| !game->wall[4] || !game->floor || !game->player_texture
 		|| !game->collectible_texture || !game->exit_texture)
 		return (0);
 	return (1);

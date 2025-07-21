@@ -6,11 +6,11 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:30:27 by jacobmaizel       #+#    #+#             */
-/*   Updated: 2024/11/26 14:23:33 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:24:05 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 void	free_map(char **map)
 {

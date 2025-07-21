@@ -6,11 +6,11 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:53:50 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/26 16:11:19 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:23:40 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 static t_position	find_position(char **map)
 {

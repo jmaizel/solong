@@ -6,11 +6,11 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:31:26 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/26 14:23:00 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:23:48 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 int	check_top_bottom_borders(char **map, int width, int height)
 {

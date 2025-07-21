@@ -6,11 +6,11 @@
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:04:42 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/26 15:57:58 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:23:51 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 int	is_map_rectangular(char **map)
 {

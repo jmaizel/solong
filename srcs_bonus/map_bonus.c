@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:53 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/26 20:01:01 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:28:25 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "game_bonus.h"
 
 char	**append_line_to_map(char **map, int line_count, char *line)
 {
@@ -89,8 +89,15 @@ int	read_map(const char *filename, t_map *map)
 
 void	destroy_textures(t_game *game)
 {
-	if (game->wall)
-		mlx_destroy_image(game->mlx, game->wall);
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		if (game->wall[i])
+			mlx_destroy_image(game->mlx, game->wall[i]);
+		i++;
+	}
 	if (game->floor)
 		mlx_destroy_image(game->mlx, game->floor);
 	if (game->player_texture)

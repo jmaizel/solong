@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   game_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaizel <jmaizel@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:58:57 by jmaizel           #+#    #+#             */
-/*   Updated: 2024/11/20 10:58:59 by jmaizel          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:27:41 by jmaizel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#ifndef GAME_BONUS_H
+# define GAME_BONUS_H
 
 # define TILE_SIZE 48
 
+# include "ft_printf.h"
+# include "get_next_line.h"
+# include "libft.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdlib.h>
-# include <time.h>
 # include <unistd.h>
 
 typedef struct s_position
@@ -41,9 +43,11 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_map		map;
-	void		*wall_texture;
-	void		*floor_texture;
+	void		*wall[5];
+	void		*floor;
 	void		*player_texture;
+	int			current_frame;
+	int			animation_counter;
 	void		*collectible_texture;
 	void		*exit_texture;
 	void		*barriere_texture;
@@ -70,5 +74,7 @@ void			destroy_textures(t_game *game);
 int				load_textures(t_game *game);
 int				handle_keypress(int keycode, t_game *game);
 int				close_window(t_game *game);
+int				animate_player(t_game *game);
+void			draw_tile(t_game *game, int x, int y);
 
 #endif
